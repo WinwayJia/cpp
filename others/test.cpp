@@ -40,6 +40,6 @@ int main()
 #define VALUE_NAME(v) #v
     cout << VALUE_NAME(a) << endl;
 
-    cout << #a << endl;
+//    cout << #a << endl; // error
     return 0;
 }
