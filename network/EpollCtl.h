@@ -6,13 +6,9 @@
 #define CPP_EPOLLCTL_H
 
 #include <map>
+#include <fcntl.h>
 
 typedef void (*callback)(int fd, void* buff, int len);
-
-typedef struct {
-    int epfd;
-    std::map<int, callback> *map;
-} thread_arg;
 
 class EpollCtl {
 public:
@@ -22,6 +18,10 @@ public:
     int add_fd(int fd, callback cb);
     int del_fd(int fd);
     int run();
+    inline void set_nonblocking(int fd) {
+        int flags = fcntl(fd, F_GETFL);
+        fcntl(fd, F_SETFL, O_NONBLOCK|flags);
+    }
 
 private:
     static void* epoll_maintain(void* arg);
