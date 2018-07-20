@@ -1,0 +1,90 @@
+# In CMake, every variable is a string.
+message("Hello World")
+set(NAME "name")
+message("Hello ${NAME}")
+
+set(JOHN_NAME "John Smith")
+set(JOHN_ADDRESS "123 Fake St")
+set(PERSON "JOHN")
+message("${${PERSON}_NAME} lives at ${${PERSON}_ADDRESS}.")
+
+
+# In CMake, every statement is a command that takes a list of string arguments and has no return value. 
+math(EXPR MY_SUM "1 + 1")                   # Evaluate 1 + 1; store result in MY_SUM
+message("The sum is ${MY_SUM}.")
+math(EXPR DOUBLE_SUM "${MY_SUM} * 2")       # Multiply by 2; store result in DOUBLE_SUM
+message("Double that is ${DOUBLE_SUM}.")
+
+
+# flow control
+
+set(LINUX 0)
+if (LINUX) 
+    message("os type linux")
+endif()
+
+# Fibonacci numbers
+set(A "1")
+set(B "1")
+while (${A} LESS "100")
+    message("${A}")
+    math(EXPR A "${A} + ${B}")
+    math(EXPR B "${A} - ${B}")
+endwhile()
+
+
+
+set(ARGS "EXPR;T;1 + 1")
+math(${ARGS})                                   # Equivalent to calling math(EXPR T "1 + 1")
+
+set(ARGS "EXPR;T;1 + 1")
+message("${ARGS}")                              # Prints: EXPR;T;1 + 1
+
+set(MY_LIST These are separate arguments)
+message("${MY_LIST}")                           # Prints: These;are;separate;arguments
+message(${MY_LIST})                           # Prints: Theseareseparatearguments
+
+list(REMOVE_ITEM MY_LIST "separate")            # Removes "separate" from the list
+message("${MY_LIST}")                           # Prints: These;are;arguments
+
+foreach(ARG These are separate arguments)
+    message(${ARG})                           # Prints each word on a separate line
+endforeach()
+
+
+# function
+function(doubleInt VARNAME VALUE)
+    math(EXPR T "${VALUE} * 2")
+    set(${VARNAME} ${T} PARENT_SCOPE)
+    message(${T})
+endfunction()
+
+doubleInt(RESULT 8)
+message("${RESULT}")
+
+# macro
+macro(doubleI VARNAME VALUE) 
+    math(EXPR ${VARNAME} "${VALUE} * 2")
+endmacro()
+
+doubleI(R "9")
+message("${R}")
+
+macro(doubleIt VARNAME VALUE)
+    math(EXPR ${VARNAME} "${VALUE} * 2")        # Set the named variable in caller's scope
+endmacro()
+
+doubleIt(RESULT "4")                    # Tell the macro to set the variable named RESULT
+message("${RESULT}")                    # Prints: 8
+
+
+# Both functions and macros accept an arbitrary number of arguments.
+function(doubleEach)
+    foreach(ARG ${ARGN})                # Iterate over each argument
+        math(EXPR N "${ARG} * 2")       # Double ARG's numeric value; store result in N
+        message("${N}")                 # Print N
+    endforeach()
+endfunction()
+
+doubleEach(5 6 7 8)                     # Prints 10, 12, 14, 16 on separate lines
+
