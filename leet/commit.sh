@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rm *_bm
-rm *_test
+rm -f *_bm
+rm -f *_test
 
 git add .
 git commit -m 'add file'
