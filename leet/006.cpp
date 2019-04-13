@@ -14,6 +14,13 @@
 
 using namespace std;
 
+class Solution {
+    public:
+        string convert(string s, int numRows) {
+
+        }
+};
+
 static void BM_best(benchmark::State& state) {
     for (auto_:state)
         zigzagLevelOrder(root);
