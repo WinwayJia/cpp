@@ -51,6 +51,10 @@ TEST(TestSolution, HandlerNormal) {
         EXPECT_EQ(1, s.removeDuplicates(nums));
         EXPECT_EQ(nums[0], 1);
     }
+    {
+        vector<int> nums;
+        
+    }
 }
 
 static void BM_mine(benchmark::State& state) {
