@@ -23,16 +23,23 @@ struct TreeNode {
 
 class Solution {
     public:
-        int maxDepth(TreeNode* root) {
-            int ans = 0;
-            if (nullptr == root) {
-                return ans;
+        bool isSameTree(TreeNode* p, TreeNode* q) {
+            if (nullptr == p && nullptr == q) {
+                return true;
             }
-            ans = std::max(maxDepth(root->left), maxDepth(root->right)) + 1;
 
-            return ans;
+            if ((nullptr != p && nullptr == q) || (nullptr == p && nullptr != q)) {
+                return false;
+            }
+
+            if (p->val != q->val) {
+                return false;
+            }
+
+            return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
         }
 };
+
 
 TEST(TestSolution, HandlerNormal) {
     Solution s;
@@ -42,7 +49,7 @@ TEST(TestSolution, HandlerNormal) {
         TreeNode* node3 = new TreeNode(3);
         node1->left = node2;
         node1->right = node3;
-        EXPECT_EQ(2, s.maxDepth(node1));
+        EXPECT_EQ(true, s.isSameTree(node1, node1));
         delete node1;
         delete node2;
         delete node3;
@@ -53,8 +60,8 @@ TEST(TestSolution, HandlerNormal) {
         TreeNode* node2 = new TreeNode(2);
         TreeNode* node3 = new TreeNode(3);
         node2->left = node1;
-        node1->right = node3;
-        EXPECT_EQ(3, s.maxDepth(node2));
+        node2->right = node3;
+        EXPECT_EQ(true, s.isSameTree(node2, node2));
         delete node1;
         delete node2;
         delete node3;

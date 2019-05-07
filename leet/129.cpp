@@ -23,16 +23,26 @@ struct TreeNode {
 
 class Solution {
     public:
-        int maxDepth(TreeNode* root) {
+        int sumNumbers(TreeNode* root) {
             int ans = 0;
             if (nullptr == root) {
                 return ans;
             }
-            ans = std::max(maxDepth(root->left), maxDepth(root->right)) + 1;
+            queue<TreeNode*> q;
+            q.push(root);
 
-            return ans;
+            int tmp = 0;
+            while (!q.empty()) {
+                TreeNode* n = q.front();
+                q.pop();
+
+                tmp = tmp * 10 + n.val;
+                if ()
+            }
+
         }
 };
+
 
 TEST(TestSolution, HandlerNormal) {
     Solution s;
