@@ -18,7 +18,6 @@ void insertSort(int* arr, int len) {
 
 void shellSort(int* arr, int len) {
     int step = len / 2;
-    for 
 }
 
 int main() {

@@ -13,22 +13,28 @@
 #include <benchmark/benchmark.h>
 #include <gtest/gtest.h>
 
+using namespace std;
+
 /*
- * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。
- *
- * 示例 1：
- * 输入: "babad"
- * 输出: "bab"
- * 注意: "aba"也是一个有效答案。
- *
- * 示例 2：
- * 输入: "cbbd"
- * 输出: "bb"
- */
+给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+
+'.' 匹配任意单个字符
+'*' 匹配零个或多个前面的那一个元素
+所谓匹配，是要涵盖 整个 字符串 s的，而不是部分字符串。
+*/
 
 class Solution {
     public:
-        string longestPalindrome(string s) {
+        bool isMatch(string s, string p) {
+            int i = 0;
+            int j = 0;
+            for (; i<s.size() && j < p.size(); i++) {
+                if (p[i] == '.' || p[i] == s[i]) {
+                    j ++;
+                    continue;
+                }
+
+            }
         }
 };
 

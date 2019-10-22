@@ -42,6 +42,62 @@ class Solution {
 
             return ans;
         }
+
+        int trap2(vector<int>& height) {
+            vector<int> left_max(height.size());
+            vector<int> right_max(height.size());
+            int ans = 0;
+
+            int max = height[0];
+            for (int i=1; i<height.size()-1; i++) {
+                left_max[i] = max;
+                if (max < height[i]) {
+                    max = height[i];
+                }
+            }
+            max = height[height.size()-1];
+            for (int i=height.size()-1; i>0; i--) {
+                right_max[i] = max;
+                if (max < height[i]) {
+                    max = height[i];
+                }
+            }
+
+            for (int i=1; i<height.size(); i++) {
+                if (height[i] < left_max[i] && height[i] < right_max[i]) {
+                    ans += (left_max[i] > right_max[i] ? right_max[i] : left_max[i]) - height[i];
+                }
+            }
+            return ans;
+        }
+
+        int trap3(vector<int>& height) {
+            int left_max = 0;
+            int right_max = 0;
+            int ans = 0;
+            int left = 0;
+            int right = height.size() - 1;
+
+            while (left < right) {
+                if (height[left] < height[right]) {
+                    if (height[left] < left_max) {
+                        ans += left_max - height[left];
+                    } else {
+                        left_max = height[left];
+                    }
+                    left ++;
+                } else {
+                    if (height[right] < right_max) {
+                        ans += right_max - height[right];
+                    } else {
+                        right_max = height[right];
+                    }
+                    right --;
+                }
+            }
+
+            return ans;
+        }
 };
 
 TEST(TestSolution, HandlerNormal) {
@@ -49,6 +105,12 @@ TEST(TestSolution, HandlerNormal) {
     Solution s;
     int ans = s.trap(height);
     EXPECT_EQ(6, ans);
+
+    int ans2 = s.trap2(height);
+    EXPECT_EQ(6, ans2);
+
+    int ans3 = s.trap3(height);
+    EXPECT_EQ(6, ans3);
 }
 
 static void BM_best(benchmark::State& state) {
