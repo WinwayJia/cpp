@@ -18,13 +18,28 @@ using namespace std;
 class Solution {
     public:
         vector<int> searchRange(vector<int>& nums, int target) {
+            vector<int> ans= {-1, -1};
             for (int i=0; i<nums.size(); i++) {
+                if (nums[i] < target) {
+                    continue;
+                } else if (nums[i] > target) {
+                    return ans;
+                } else {
+                    nums[0] == -1 ?  ans[0] = i : ans[1] = i;
+                }
             }
+
+            return ans;
         }
 };
 
 
 TEST(TestSolution, HandlerNormal) {
+    Solution s;
+    {
+    }
+    {
+    }
 }
 
 static void BM_best(benchmark::State& state) {
