@@ -82,6 +82,9 @@ class Solution {
 TEST(TestSolution, HandlerNormal) {
     Solution s;
     auto ans = s.letterCombinations("233");
+    for (auto& item : ans) {
+        std::cout << item << std::endl;
+    }
 }
 
 static void BM_best(benchmark::State& state) {
