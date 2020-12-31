@@ -7,6 +7,7 @@ void myFunc(const T &t) {
     std::cout << t << std::endl;
 }
 
+/*
 // bool in vector
 void test_bool_vector() {
     std::vector<bool> vec = {false, true, false};
@@ -28,8 +29,20 @@ void test_reserve() {
     vec[0] = 100;
     std::cout << "size: " << vec.size() << " capacity: " << vec.capacity() << std::endl;
 }
+*/
 
 int main(int argc, char** argv) {
-    test_reserve();
-    test_bool_vector();
+//    test_reserve();
+//    test_bool_vector();
+
+    std:: vector<int> vec1 = {1, 2};
+    std::vector<int> vec2 = {3, 4};
+    vec1.insert(vec1.end(), vec2.begin(), vec2.end());
+    for (auto& v : vec1) {
+        std::cout << v << " ";
+    }
+    std::cout << std::endl;
+    for (auto& v : vec2) {
+        std::cout << v << " ";
+    }
 }
