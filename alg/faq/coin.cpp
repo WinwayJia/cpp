@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-int change(std::vector<int> &vec, int total) {
+int change(std::vector<int>& vec, int total) {
     std::vector<int> table(total + 1, 0);
 
     for (auto x : vec) {
@@ -28,7 +28,7 @@ int change(std::vector<int> &vec, int total) {
     return table.back();
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const* argv[]) {
     std::vector<int> coins = {1, 20, 2, 5, 10};
     // std::cout << change(coins, 2) << std::endl;
     // std::cout << change(coins, 12) << std::endl;

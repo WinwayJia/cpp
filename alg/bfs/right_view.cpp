@@ -1,8 +1,8 @@
+#include "util.h"
 #include <queue>
 #include <vector>
-#include "util.h"
 
-std::vector<int> rightView(TreeNode* root) {
+std::vector<int> rightView(TreeNode *root) {
     std::vector<int> ans;
     ans.reserve(32);
 
@@ -10,17 +10,17 @@ std::vector<int> rightView(TreeNode* root) {
         return ans;
     }
 
-    std::queue<TreeNode*> q;
+    std::queue<TreeNode *> q;
     q.push(root);
 
     while (!q.empty()) {
         auto size = q.size();
 
-        for (int i=0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             auto node = q.front();
             q.pop();
 
-            if (i == size-1) {
+            if (i == size - 1) {
                 ans.push_back(node->val);
             }
 
@@ -33,6 +33,28 @@ std::vector<int> rightView(TreeNode* root) {
             }
         }
     }
+
+    return ans;
+}
+
+void do_it(std::vector<int> &ans, TreeNode *root, int high) {
+    if (root == nullptr) {
+        return;
+    }
+
+    if (high >= ans.size()) {
+        ans.resize(high + 1);
+    }
+
+    ans[high] = root->val;
+
+    do_it(ans, root->left, high + 1);
+    do_it(ans, root->right, high + 1);
+}
+
+std::vector<int> right_view_v2(TreeNode *root) {
+    std::vector<int> ans;
+    do_it(ans, root, 0);
 
     return ans;
 }

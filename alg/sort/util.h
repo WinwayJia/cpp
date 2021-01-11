@@ -20,4 +20,6 @@ inline std::ostream& operator<<(std::ostream& o, const std::vector<int>& vec) {
 void bubble_sort(std::vector<int>& vec);
 void quick_sort(std::vector<int>& vec);
 
+int binary_search(const std::vector<int>& vec, int target);
+
 #endif // __SORT_UTIL_H__

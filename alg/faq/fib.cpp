@@ -27,7 +27,7 @@ int fib_dp(int n) {
     return suf;
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const* argv[]) {
     std::cout << fib(10) << std::endl;
     std::cout << fib_dp(10) << std::endl;
     return 0;
