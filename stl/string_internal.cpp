@@ -46,7 +46,16 @@ void read() {
     printf("ptr: a: %p b: %p\n", a.data(), b.data());
 }
 
+void sso() {
+    std::string a = "hello world";
+    std::string b = a;
+    assert(a.data() == b.data());
+    std::cout << std::boolalpha << (a.data() == b.data()) << std::endl;
+}
+
 int main() {
+    sso();
+    return 0;
     std::string a = std::string("hello");
     a += std::to_string(time(nullptr));
     a.reserve(255);

@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**"
             ],
-            "defines": [],
+            "defines": [
+                "_GLIBCXX_USE_CXX11_ABI=1"
+            ],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c99",
             "cppStandard": "c++14"
