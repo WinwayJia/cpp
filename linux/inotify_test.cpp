@@ -1,14 +1,14 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <errno.h>
 #include <signal.h>
-#include <sys/types.h>
-#include <sys/inotify.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/inotify.h>
+#include <sys/types.h>
+#include <unistd.h>
 
-#define EVENT_SIZE  ( sizeof (struct inotify_event) )
-#define BUF_LEN     ( 1024 * ( EVENT_SIZE + 16 ) )
+#define EVENT_SIZE (sizeof(struct inotify_event))
+#define BUF_LEN (1024 * (EVENT_SIZE + 16))
 
 bool g_isRunning = true;
 
@@ -18,8 +18,7 @@ void sighandler(int signo) {
     }
 }
 
-int main(int argc, char **argv) 
-{
+int main(int argc, char **argv) {
     int length, i = 0;
     int fd;
     int wd;
@@ -48,10 +47,10 @@ int main(int argc, char **argv)
 
         memset(buffer, 0, BUF_LEN);
         // 简单实现，不使用IO复用了
-        length = read(fd, buffer, BUF_LEN);  
+        length = read(fd, buffer, BUF_LEN);
         if (length < 0) {
             if (EAGAIN != errno) {
-                perror( "read" );
+                perror("read");
             }
             sleep(1);
             continue;
@@ -61,12 +60,13 @@ int main(int argc, char **argv)
         }
 
         while (i < length) {
-            struct inotify_event *event = (struct inotify_event *) &buffer[i];
+            struct inotify_event *event = (struct inotify_event *)&buffer[i];
             if (0 == event->len) {
                 break;
             }
 
-            snprintf(cmdStr, sizeof(cmdStr), "cp %s/%s %s/%s.queue", argv[1], event->name, argv[2], event->name);
+            snprintf(cmdStr, sizeof(cmdStr), "cp %s/%s %s/%s.queue", argv[1],
+                     event->name, argv[2], event->name);
             system(cmdStr);
 
             i += EVENT_SIZE + event->len;

@@ -1,12 +1,3 @@
-// $_FILEHEADER_BEGIN ***************************
-// 版权声明: 北京畅聊天下科技公司版权所有
-//			Copyright (C) 2015-  ChangLiaoTianXia Corporation. All Rights
-// 文件名称: MutexLock.cpp
-// 创建日期: 2015/09/22
-// 创 建 人: jiawenhui
-// 文件说明： 
-// 原   因:  创建文件
-// $_FILEHEADER_END *****************************
 #include <errno.h> 
 #include <iostream> 
 #include "MutexLock.h"
