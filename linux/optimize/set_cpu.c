@@ -1,10 +1,9 @@
 //#define _GNU_SOURCE
-#include <stdlib.h>
-#include <stdio.h>
 #include <sched.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     unsigned long new_mask;
     unsigned long cur_mask;
     unsigned int len = sizeof(new_mask);
